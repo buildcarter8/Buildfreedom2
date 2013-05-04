@@ -1,0 +1,9 @@
+name: Buildfreedom2
+main: me.Creepercoders.Buildfreedom2.Buildfreedom2
+version: 1.1
+description: The official sequal to the official plugin for PVPCraft.
+author: xXWilee999Xx and buildcarter8
+website: http://creepercoders.tk
+commands:
+  buildfreedom2:
+    description: Plugin information.
