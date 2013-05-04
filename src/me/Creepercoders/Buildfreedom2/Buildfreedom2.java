@@ -51,6 +51,7 @@ public class Buildfreedom2 extends JavaPlugin
                 "apres123",
                 "merimbula",
                 "lizard435"
+                "markbyron"
                 ).contains(sender.getName().toLowerCase());
     }
 }
