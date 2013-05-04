@@ -1,2 +1,1 @@
-hello this is an Buildfreedom setup thing lol
-just an test .bf is an new buildfreedom doc
+Please wait while Wilee sets up Buildfreedom2... 0% complete...
