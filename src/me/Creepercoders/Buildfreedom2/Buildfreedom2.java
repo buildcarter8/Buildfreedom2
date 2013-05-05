@@ -1,10 +1,14 @@
 package me.Creepercoders.Buildfreedom2;
 
-import java.util.Arrays;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,8 +20,8 @@ public class Buildfreedom2 extends JavaPlugin
 
     public void onEnable()
     {
-    	loadSuperadminConfig();
-    	
+     loadSuperadminConfig();
+    
         log.info("[Buildfreedom2] - Enabled! - v1.1 by buildcarter8 and xXWilee999Xx");
         
         BF2_Util.deleteFolder(new File("./_deleteme"));
@@ -38,10 +42,18 @@ public class Buildfreedom2 extends JavaPlugin
         
         if(cmd.getName().equalsIgnoreCase("buildfreedom2"))
         {
-        	sender.sendMessage(ChatColor.AQUA + "Buildfreedom2 1.3 by buildcarter8 and xXWilee999Xx");
+         sender.sendMessage(ChatColor.AQUA + "Buildfreedom2 1.3 by buildcarter8 and xXWilee999Xx");
         }
-		return false;
+return false;
     }
+
+    public void loadMainConfig()
+    {
+
+    }
+    
+    public static List<String> superadmins = new ArrayList<String>();
+    public static List<String> superadmin_ips = new ArrayList<String>();
     
     public void loadSuperadminConfig()
     {
@@ -66,4 +78,4 @@ public class Buildfreedom2 extends JavaPlugin
             }
         }
     }
-
+}
