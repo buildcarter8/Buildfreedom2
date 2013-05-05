@@ -1,5 +1,22 @@
 package me.Creepercoders.Buildfreedom2;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetSocketAddress;
+import java.util.List;
+import java.util.jar.JarFile;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.zip.ZipEntry;
+
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+
 public class BF2_Util
 {
    private static final Logger log = Logger.getLogger("Minecraft");
@@ -77,7 +94,7 @@ public class BF2_Util
 
 
    
-       public static boolean isUserSuperadmin(CommandSender user, TotalFreedomMod tfm)
+       public static boolean isUserSuperadmin(CommandSender user, Buildfreedom2 bf2)
     {
         try
         {
@@ -88,7 +105,7 @@ public class BF2_Util
 
             if (Bukkit.getOnlineMode())
             {
-                if (TotalFreedomMod.superadmins.contains(user.getName().toLowerCase()))
+                if (Buildfreedom2.superadmins.contains(user.getName().toLowerCase()))
                 {
                     return true;
                 }
@@ -103,7 +120,7 @@ public class BF2_Util
                     String user_ip = ip_address_obj.getAddress().toString().replaceAll("/", "").trim();
                     if (user_ip != null && !user_ip.isEmpty())
                     {
-                        if (TotalFreedomMod.superadmin_ips.contains(user_ip))
+                        if (Buildfreedom2.superadmin_ips.contains(user_ip))
                         {
                             return true;
                         }
@@ -119,11 +136,11 @@ public class BF2_Util
         return false;
     }
 
-    public static boolean checkPartialSuperadminIP(String user_ip, TotalFreedomMod tfm)
+    public static boolean checkPartialSuperadminIP(String user_ip, Buildfreedom2 bf2)
     {
         user_ip = user_ip.trim();
 
-        if (TotalFreedomMod.superadmin_ips.contains(user_ip))
+        if (Buildfreedom2.superadmin_ips.contains(user_ip))
         {
             return true;
         }
@@ -136,7 +153,7 @@ public class BF2_Util
             }
 
             String match_ip = null;
-            for (String test_ip : TotalFreedomMod.superadmin_ips)
+            for (String test_ip : Buildfreedom2.superadmin_ips)
             {
                 String[] test_octets = test_ip.split("\\.");
                 if (test_octets.length == 4)
@@ -151,7 +168,7 @@ public class BF2_Util
 
             if (match_ip != null)
             {
-                TotalFreedomMod.superadmin_ips.add(user_ip);
+                Buildfreedom2.superadmin_ips.add(user_ip);
 
                 FileConfiguration config = YamlConfiguration.loadConfiguration(new File(tfm.getDataFolder(), TotalFreedomMod.SUPERADMIN_FILE));
 
@@ -174,7 +191,7 @@ public class BF2_Util
 
                 try
                 {
-                    config.save(new File(tfm.getDataFolder(), TotalFreedomMod.SUPERADMIN_FILE));
+                    config.save(new File(bf2.getDataFolder(), Buildfreedom2.SUPERADMIN_FILE));
                 }
                 catch (IOException ex)
                 {
@@ -194,7 +211,7 @@ public class BF2_Util
             {
                 for (File f : file.listFiles())
                 {
-                    if (!TFM_Util.deleteFolder(f))
+                    if (!BF2_Util.deleteFolder(f))
                     {
                         return false;
                     }
@@ -208,3 +225,4 @@ public class BF2_Util
             return false;
         }
     }
+}
