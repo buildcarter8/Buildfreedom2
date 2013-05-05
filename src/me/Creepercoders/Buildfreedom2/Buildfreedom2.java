@@ -22,7 +22,7 @@ public class Buildfreedom2 extends JavaPlugin
     {
      loadSuperadminConfig();
     
-        log.info("[Buildfreedom2] - Enabled! - v1.1 by buildcarter8 and xXWilee999Xx");
+        log.info("[Buildfreedom2] - Enabled! - v1.8 by buildcarter8 and xXWilee999Xx");
         
         BF2_Util.deleteFolder(new File("./_deleteme"));
     }
@@ -42,7 +42,7 @@ public class Buildfreedom2 extends JavaPlugin
         
         if(cmd.getName().equalsIgnoreCase("buildfreedom2"))
         {
-         sender.sendMessage(ChatColor.AQUA + "Buildfreedom2 1.3 by buildcarter8 and xXWilee999Xx");
+         sender.sendMessage(ChatColor.AQUA + "Buildfreedom2 1.8 by buildcarter8 and xXWilee999Xx");
         }
 return false;
     }
