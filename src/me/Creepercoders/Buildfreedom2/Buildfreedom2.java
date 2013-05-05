@@ -2,8 +2,13 @@ package me.Creepercoders.Buildfreedom2;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import me.Creepercoders.Buildfreedom2.Commands.BF2_Command;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -17,12 +22,14 @@ public class Buildfreedom2 extends JavaPlugin
     private Logger log = Logger.getLogger("Minecraft");
     
     public static final String SUPERADMIN_FILE = "superadmin.yml";
+    public static final String COMMAND_PATH = "me.Creepercoders.Buildfreedom2.Commands";
+    public static final String COMMAND_PREFIX = "Command_";
 
     public void onEnable()
     {
      loadSuperadminConfig();
     
-        log.info("[Buildfreedom2] - Enabled! - v1.8 by buildcarter8 and xXWilee999Xx");
+        log.info("[Buildfreedom2] - Enabled! - v2.0 by buildcarter8 and xXWilee999Xx");
         
         BF2_Util.deleteFolder(new File("./_deleteme"));
     }
@@ -32,19 +39,63 @@ public class Buildfreedom2 extends JavaPlugin
         log.info("[Buildfreedom2] - Disabled.");
     }
     
+    @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-    Player player = null;
-    if (sender instanceof Player)
+        try
         {
-            player = (Player)sender;
-    }
-        
-        if(cmd.getName().equalsIgnoreCase("buildfreedom2"))
-        {
-         sender.sendMessage(ChatColor.AQUA + "Buildfreedom2 1.8 by buildcarter8 and xXWilee999Xx");
+            Player sender_p = null;
+            boolean senderIsConsole = false;
+            if (sender instanceof Player)
+            {
+                sender_p = (Player) sender;
+                log.info(String.format("[PLAYER_COMMAND] %s(%s): /%s %s",
+                        sender_p.getName(),
+                        ChatColor.stripColor(sender_p.getDisplayName()),
+                        commandLabel,
+                        BF2_Util.implodeStringList(" ", Arrays.asList(args))));
+            }
+            else
+            {
+                senderIsConsole = true;
+                log.info(String.format("[CONSOLE_COMMAND] %s: /%s %s",
+                        sender.getName(),
+                        commandLabel,
+                        BF2_Util.implodeStringList(" ", Arrays.asList(args))));
+            }
+
+            BF2_Command dispatcher;
+            try
+            {
+                ClassLoader classLoader = Buildfreedom2.class.getClassLoader();
+                dispatcher = (BF2_Command) classLoader.loadClass(String.format("%s.%s%s", COMMAND_PATH, COMMAND_PREFIX, cmd.getName().toLowerCase())).newInstance();
+                dispatcher.setPlugin(this);
+            }
+            catch (Throwable ex)
+            {
+                log.log(Level.SEVERE, "[" + getDescription().getName() + "] Command not loaded: " + cmd.getName(), ex);
+                sender.sendMessage(ChatColor.RED + "Command Error: Command not loaded: " + cmd.getName());
+                return true;
+            }
+
+            try
+            {
+                return dispatcher.run(sender, sender_p, cmd, commandLabel, args, senderIsConsole);
+            }
+            catch (Throwable ex)
+            {
+                sender.sendMessage(ChatColor.RED + "Command Error: " + ex.getMessage());
+            }
+
+            dispatcher = null;
         }
-return false;
+        catch (Throwable ex)
+        {
+            log.log(Level.SEVERE, "[" + getDescription().getName() + "] Command Error: " + commandLabel, ex);
+            sender.sendMessage(ChatColor.RED + "Unknown Command Error.");
+        }
+
+        return true;
     }
 
     public void loadMainConfig()
