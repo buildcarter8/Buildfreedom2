@@ -5,6 +5,79 @@ public class BF2_Util
 {
    private static final Logger log = Logger.getLogger("Minecraft");
    
+       public static void createDefaultConfiguration(String name, Buildfreedom2 bf2, File plugin_file)
+    {
+        File actual = new File(bf2.getDataFolder(), name);
+        if (!actual.exists())
+        {
+            log.info("[" + bf2.getDescription().getName() + "]: Installing default configuration file template: " + actual.getPath());
+            InputStream input = null;
+            try
+            {
+                JarFile file = new JarFile(plugin_file);
+                ZipEntry copy = file.getEntry(name);
+                if (copy == null)
+                {
+                    log.severe("[" + bf2.getDescription().getName() + "]: Unable to read default configuration: " + actual.getPath());
+                    return;
+                }
+                input = file.getInputStream(copy);
+            }
+            catch (IOException ioex)
+            {
+                log.severe("[" + bf2.getDescription().getName() + "]: Unable to read default configuration: " + actual.getPath());
+            }
+            if (input != null)
+            {
+                FileOutputStream output = null;
+
+                try
+                {
+                    bf2.getDataFolder().mkdirs();
+                    output = new FileOutputStream(actual);
+                    byte[] buf = new byte[8192];
+                    int length = 0;
+                    while ((length = input.read(buf)) > 0)
+                    {
+                        output.write(buf, 0, length);
+                    }
+
+                    log.info("[" + bf2.getDescription().getName() + "]: Default configuration file written: " + actual.getPath());
+                }
+                catch (IOException ioex)
+                {
+                    log.log(Level.SEVERE, "[" + bf2.getDescription().getName() + "]: Unable to write default configuration: " + actual.getPath(), ioex);
+                }
+                finally
+                {
+                    try
+                    {
+                        if (input != null)
+                        {
+                            input.close();
+                        }
+                    }
+                    catch (IOException ioex)
+                    {
+                    }
+
+                    try
+                    {
+                        if (output != null)
+                        {
+                            output.close();
+                        }
+                    }
+                    catch (IOException ioex)
+                    {
+                    }
+                }
+            }
+        }
+    }
+
+
+   
        public static boolean isUserSuperadmin(CommandSender user, TotalFreedomMod tfm)
     {
         try
