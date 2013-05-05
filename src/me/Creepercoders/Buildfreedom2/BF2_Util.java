@@ -21,6 +21,20 @@ public class BF2_Util
 {
    private static final Logger log = Logger.getLogger("Minecraft");
    
+   public static String implodeStringList(String glue, List<String> pieces)
+   {
+       StringBuilder output = new StringBuilder();
+       for (int i = 0; i < pieces.size(); i++)
+       {
+           if (i != 0)
+           {
+               output.append(glue);
+           }
+           output.append(pieces.get(i));
+       }
+       return output.toString();
+   }
+   
        public static void createDefaultConfiguration(String name, Buildfreedom2 bf2, File plugin_file)
     {
         File actual = new File(bf2.getDataFolder(), name);
