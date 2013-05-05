@@ -1,4 +1,3 @@
-//Workin' on this.
 package me.Creepercoders.Buildfreedom2;
 
 public class BF2_Util
