@@ -12,11 +12,15 @@ public class Buildfreedom2 extends JavaPlugin
 {
     private Logger log = Logger.getLogger("Minecraft");
     
-    //public static final String SUPERADMIN_FILE = "superadmin.yml";
+    public static final String SUPERADMIN_FILE = "superadmin.yml";
 
     public void onEnable()
     {
+    	loadSuperadminConfig();
+    	
         log.info("[Buildfreedom2] - Enabled! - v1.1 by buildcarter8 and xXWilee999Xx");
+        
+        BF2_Util.deleteFolder(new File("./_deleteme"));
     }
 
     public void onDisable()
@@ -39,20 +43,27 @@ public class Buildfreedom2 extends JavaPlugin
 		return false;
     }
     
-    private boolean isUserSuperadmin(CommandSender sender)
+    public void loadSuperadminConfig()
     {
-        return Arrays.asList(
-                "buildcarter8",
-                "omggirl1",
-                "girlstory11",
-                "speedcrafter11",
-                "xxwilee999xx",
-                "cowgomooo12",
-                "apres123",
-                "merimbula",
-                "lizard435"
-                "markbyron"
-                ).contains(sender.getName().toLowerCase());
+        BF2_Util.createDefaultConfiguration(SUPERADMIN_FILE, this, getFile());
+        FileConfiguration config = YamlConfiguration.loadConfiguration(new File(getDataFolder(), SUPERADMIN_FILE));
+
+        superadmins = new ArrayList<String>();
+        superadmin_ips = new ArrayList<String>();
+
+        for (String user : config.getKeys(false))
+        {
+            superadmins.add(user.toLowerCase().trim());
+
+            List<String> user_ips = (List<String>) config.getStringList(user);
+            for (String ip : user_ips)
+            {
+                ip = ip.toLowerCase().trim();
+                if (!superadmin_ips.contains(ip))
+                {
+                    superadmin_ips.add(ip);
+                }
+            }
+        }
     }
-}
 
