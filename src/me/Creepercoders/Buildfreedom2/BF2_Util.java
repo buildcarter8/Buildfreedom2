@@ -35,6 +35,17 @@ public class BF2_Util
        return output.toString();
    }
    
+   public static String enablePlugin()
+   {
+     loadSuperadminConfig();
+    
+        log.info("[Buildfreedom2] - Enabled! - v2.0 by buildcarter8 and xXWilee999Xx");
+        
+        BF2_Util.deleteFolder(new File("./_deleteme"));
+   }
+      
+   
+   
        public static void createDefaultConfiguration(String name, Buildfreedom2 bf2, File plugin_file)
     {
         File actual = new File(bf2.getDataFolder(), name);
