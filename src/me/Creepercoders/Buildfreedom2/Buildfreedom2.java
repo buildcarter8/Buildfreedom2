@@ -25,14 +25,7 @@ public class Buildfreedom2 extends JavaPlugin
     public static final String COMMAND_PATH = "me.Creepercoders.Buildfreedom2.Commands";
     public static final String COMMAND_PREFIX = "Command_";
 
-    public void onEnable()
-    {
-     loadSuperadminConfig();
-    
-        log.info("[Buildfreedom2] - Enabled! - v2.0 by buildcarter8 and xXWilee999Xx");
-        
-        BF2_Util.deleteFolder(new File("./_deleteme"));
-    }
+    BF2_Util.enablePlugin();
 
     public void onDisable()
     {
