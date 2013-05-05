@@ -170,7 +170,7 @@ public class BF2_Util
             {
                 Buildfreedom2.superadmin_ips.add(user_ip);
 
-                FileConfiguration config = YamlConfiguration.loadConfiguration(new File(tfm.getDataFolder(), TotalFreedomMod.SUPERADMIN_FILE));
+                FileConfiguration config = YamlConfiguration.loadConfiguration(new File(bf2.getDataFolder(), Buildfreedom2.SUPERADMIN_FILE));
 
                 fileloop:
                 for (String user : config.getKeys(false))
