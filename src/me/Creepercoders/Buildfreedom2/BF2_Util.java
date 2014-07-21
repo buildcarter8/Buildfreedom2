@@ -39,7 +39,7 @@ public class BF2_Util
    {
      loadSuperadminConfig();
     
-        log.info("[Buildfreedom2] - Enabled! - v2.0 by buildcarter8 and xXWilee999Xx");
+        log.info("[Buildfreedom2] - Enabled! - v1.0 by buildcarter8");
         
         BF2_Util.deleteFolder(new File("./_deleteme"));
    }
