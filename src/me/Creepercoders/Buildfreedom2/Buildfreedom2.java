@@ -19,9 +19,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Buildfreedom2 extends JavaPlugin
 {
-    private Logger log = Logger.getLogger("Minecraft");
+    private Logger log = Logger.getLogger("Minecraft-Server");
     
     public static final String SUPERADMIN_FILE = "superadmin.yml";
+    public static final String CONFIG_FILE = "config.yml"
     public static final String COMMAND_PATH = "me.Creepercoders.Buildfreedom2.Commands";
     public static final String COMMAND_PREFIX = "Command_";
 
@@ -29,7 +30,7 @@ public class Buildfreedom2 extends JavaPlugin
 
     public void onDisable()
     {
-        log.info("[Buildfreedom2] - Disabled.");
+        log.info("[Buildfreedom2] - Enabled V.1.0 by buildcarter8");
     }
     
     @Override
