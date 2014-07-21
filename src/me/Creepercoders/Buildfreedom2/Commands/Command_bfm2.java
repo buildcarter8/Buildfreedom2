@@ -10,7 +10,7 @@ public class Command_buildfreedom2 extends BF2_Command
   @Override
     public boolean run(CommandSender sender, Player sender_p, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-		sender.sendMessage(ChatColor.AQUA + "Buildfreedom2 2.0 by buildcarter8 and xXWilee999Xx");
+		sender.sendMessage(ChatColor.AQUA + "Buildfreedom2 1.0 by buildcarter8");
 		return false;
         
     }
