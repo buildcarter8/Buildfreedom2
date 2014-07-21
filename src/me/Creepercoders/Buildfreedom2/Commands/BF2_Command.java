@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 public class BF2_Command
 {
     protected Buildfreedom2 plugin;
-    protected static final Logger log = Logger.getLogger("Minecraft");
+    protected static final Logger log = Logger.getLogger("Minecraft-Server");
     
     public BF2_Command()
     {
