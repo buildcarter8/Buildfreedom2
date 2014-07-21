@@ -30,7 +30,7 @@ public class Buildfreedom2 extends JavaPlugin
 
     public void onDisable()
     {
-        log.info("[Buildfreedom2] - Enabled V.1.0 by buildcarter8");
+        log.info("[Buildfreedom2] - Disabled V.1.0 by buildcarter8");
     }
     
     @Override
