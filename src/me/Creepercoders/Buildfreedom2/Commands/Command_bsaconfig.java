@@ -127,7 +127,7 @@ public class Command_bsaconfig extends BF2_Command
                 return true;
             }
             
-            Bukkit.broadcastMessage(ChatColor.RED + sender.getName() + " - Removing " + user_name + " from the Superadmin list :( sorry!");
+            Bukkit.broadcastMessage(ChatColor.RED + sender.getName() + " - Removing " + user_name + " from the buildfreedom Superadmin list :( sorry!");
             
             sender.sendMessage("Removing superadmin: " + user_name); 
             Buildfreedom2.superadmins.remove(user_name);
