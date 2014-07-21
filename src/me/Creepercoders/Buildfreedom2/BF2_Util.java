@@ -19,7 +19,7 @@ import org.bukkit.entity.Player;
 
 public class BF2_Util
 {
-   private static final Logger log = Logger.getLogger("Minecraft");
+   private static final Logger log = Logger.getLogger("Minecraft-Server");
    
    public static String implodeStringList(String glue, List<String> pieces)
    {
